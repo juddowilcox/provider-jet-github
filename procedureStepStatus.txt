@@ -1,0 +1,3 @@
+https://github.com/crossplane/terrajet/blob/main/docs/generating-a-provider.md
+
+executed step 1

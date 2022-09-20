@@ -37,6 +37,13 @@ const (
 	errTrackUsage           = "cannot track ProviderConfig usage"
 	errExtractCredentials   = "cannot extract credentials"
 	errUnmarshalCredentials = "cannot unmarshal github credentials as JSON"
+
+	keyBaseURL = "base_url"
+	keyOwner = "owner"
+	keyToken = "token"
+
+	// GitHub credentials environment variable names
+	envToken = "GITHUB_TOKEN"
 )
 
 // TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
@@ -87,6 +94,20 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			"username": githubCreds["username"],
 			"password": githubCreds["password"],
 		}*/
+
+		// set provider configuration
+		ps.Configuration = map[string]interface{}{}
+		if v, ok := githubCreds[keyBaseURL]; ok {
+			ps.Configuration[keyBaseURL] = v
+		}
+		if v, ok := githubCreds[keyOwner]; ok {
+			ps.Configuration[keyOwner] = v
+		}
+		// set environment variables for sensitive provider configuration
+		ps.Env = []string{
+			fmt.Sprintf(fmtEnvVar, envToken, githubCreds[keyToken]),
+		}
+
 		return ps, nil
 	}
 }

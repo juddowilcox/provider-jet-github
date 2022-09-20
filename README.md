@@ -1,3 +1,8 @@
+!!!DO NOT USE!!!
+THIS PROJECT EXISTS SIMPLY TO REPORT AN INSTALLATION/CONFIGURATION
+BUG IN provider-jet-template
+!!!DO NOT USE!!!
+
 # Terrajet Template Provider
 
 `provider-jet-template` is a [Crossplane](https://crossplane.io/) provider that

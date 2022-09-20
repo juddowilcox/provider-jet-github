@@ -44,7 +44,11 @@ func GetProvider() *tjconfig.Provider {
 	}
 
 	pc := tjconfig.NewProviderWithSchema([]byte(providerSchema), resourcePrefix, modulePath,
-		tjconfig.WithDefaultResourceFn(defaultResourceFn))
+		tjconfig.WithDefaultResourceFn(defaultResourceFn),
+		tjconfig.WithIncludeList([]string{
+			"github_repository$",
+			"github_branch$",
+		}))
 
 	for _, configure := range []func(provider *tjconfig.Provider){
 		// add custom config functions

@@ -23,7 +23,9 @@ import (
 	tjconfig "github.com/crossplane/terrajet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/crossplane-contrib/provider-jet-github/config/null"
+	//"github.com/crossplane-contrib/provider-jet-github/config/null"
+	"github.com/crossplane-contrib/provider-jet-github/config/branch"
+	"github.com/crossplane-contrib/provider-jet-github/config/repository"
 )
 
 const (
@@ -52,7 +54,9 @@ func GetProvider() *tjconfig.Provider {
 
 	for _, configure := range []func(provider *tjconfig.Provider){
 		// add custom config functions
-		null.Configure,
+		//null.Configure,
+		repository.Configure,
+		branch.Configure,
 	} {
 		configure(pc)
 	}
